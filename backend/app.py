@@ -11,4 +11,9 @@ def home():
     return jsonify({"message": "Hello, World!"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
+
+
+@app.route("/get_job", methods=["GET"])
+def get_job():
+    
