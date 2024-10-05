@@ -31,11 +31,3 @@
         letter-spacing: 2px;
     }
 }
-
-.onboarding-header {
-    view-transition-name: 'onboarding-header';
-}
-
-.get-started-button {
-    view-transition-name: 'get-started-button';
-}
