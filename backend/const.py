@@ -1,11 +1,11 @@
 SUMMARY_PROMPT = """
 Given a description of a job opening, summarize all the key information in the format below in separate lines:
 
-CompanyName: string
-JobTitle: string
-Description: string
-Location: string
-Pay: int
+companyName: string
+jobTitle: string
+description: string
+location: string
+pay: int
 
 {insert}
 """
