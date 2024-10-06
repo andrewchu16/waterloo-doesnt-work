@@ -1,15 +1,29 @@
+<script lang="ts">
+</script>
+
 <svelte:head>
-	<title>Workd</title>
+	<title>Work'd</title>
 </svelte:head>
-<main class="bg-primary h-svh w-screen flex flex-col items-center justify-center">
-    <div class="h-2/3 w-full flex flex-col items-center justify-center">
-        <h1 class="font-display text-5xl text-white display-spacing suffix-animation">work</h1>
-        <h2 class="pt-4 text-white">Take back your day.</h2>
+<main class="h-screen w-screen">
+    <div class="h-full w-full bg-primary/95 flex flex-col items-center justify-center">
+        <div class="h-2/3 w-full flex flex-col items-center justify-center">
+            <h1 class="font-display text-5xl text-white display-spacing suffix-animation">work</h1>
+            <h2 class="pt-4 text-white">Take back your day.</h2>
+        </div>
+        <a
+            class="py-3 px-6 bg-white rounded-full text-primary hover:bg-neutral-200 text-xl"
+            href="/onboarding">Get Started</a
+        >
     </div>
-	<a class="py-3 px-6 bg-white rounded-full text-primary hover:bg-neutral-200 text-xl" href="/onboarding">Get Started</a>
 </main>
 
 <style>
+	main {
+		background-image: url('/onboarding-bg.jpg');
+		background-size: cover;
+		background-position: center;
+	}
+
 	.suffix-animation::after {
 		animation: delete-suffix 4s alternate-reverse infinite;
 		content: 'day';
@@ -28,9 +42,9 @@
 			@apply text-white;
 		}
 
-        45% {
-            content: 'day';
-        }
+		45% {
+			content: 'day';
+		}
 
 		50% {
 			content: 'da';
@@ -41,7 +55,7 @@
 		}
 
 		100% {
-			content: 'd';
+			content: "'d";
 			@apply text-secondary;
 		}
 	}

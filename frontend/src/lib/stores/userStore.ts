@@ -1,31 +1,28 @@
 // userStore.ts
 import { persistToLocalStorage } from '../localStorageUtil';
 
-export type SeasonAvailable = "winter 2025" | "summer 2025" | "fall 2025" | "spring 2025";
+export type SeasonAvailable = 'winter 2025' | 'summer 2025' | 'fall 2025' | 'spring 2025';
 
 export interface User {
-    Name: string;
-    Email: string;
-    Ethnicity: string[];
-    Age: number | null;
-    resumeSummary: string;
-    Education: string;
-    GraduationYear: number | null;
-    seasonAvailable: SeasonAvailable;
-    Experiences: string[];
+	name: string;
+	email: string;
+	ethnicity: string[];
+	resumeSummary: string;
+	education: string;
+	graduationYear: number | null;
+	seasonAvailable: SeasonAvailable;
 }
 
 // Initial value for the user
 const initialUser: User = {
-    Name: '',
-    Ethnicity: [],
-    Age: null,
-    resumeSummary: '',
-    Education: '',
-    GraduationYear: null,
-    seasonAvailable: 'winter 2025',
-    Experiences: [],
+	name: '',
+	ethnicity: [],
+	resumeSummary: '',
+	education: '',
+	graduationYear: null,
+	seasonAvailable: 'winter 2025',
+	email: ''
 };
 
 // Create a writable store that persists to localStorage
-export const user = persistToLocalStorage<User>('userStore', initialUser);
+export const userStore = persistToLocalStorage<User>('userStore', initialUser);

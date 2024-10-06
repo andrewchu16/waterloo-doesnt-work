@@ -2,22 +2,22 @@
 	import { userStore, type User } from '$lib/stores/userStore';
 	import { onMount } from 'svelte';
 
-	let name: string = '';
+	let education: string = '';
 	let error: string = '';
 
 	// Subscribe to userStore
 	userStore.subscribe((user: User) => {
-		name = user.name;
+		education = user.education;
 	});
 
 	const handleNext = (event: Event) => {
-		event.preventDefault(); // Prevent default form submission
-		if (!name) {
-			error = 'Name is required.';
+		event.preventDefault();
+		if (!education) {
+			error = 'Education is required.';
 		} else {
-			userStore.update((user: User) => ({ ...user, name })); // Update store
-			error = ''; // Clear error if validation passes
-			location.href = '/onboarding/email'; // Navigate to next page
+			userStore.update((user: User) => ({ ...user, education })); // Update store
+			error = '';
+			location.href = '/onboarding/seasonAvailable'; // Navigate to next page
 		}
 	};
 </script>
@@ -27,12 +27,11 @@
 	class="flex flex-col items-center justify-between h-full w-full space-y-6"
 >
 	<div class="w-full flex flex-col gap-4 items-center justify-center flex-grow">
-		<h1 class="text-2xl font-display">Enter Your Name</h1>
+		<h1 class="text-2xl font-display">Enter Your Education</h1>
 		<input
-			bind:value={name}
+			bind:value={education}
 			type="text"
-			placeholder="Name"
-            name="name"
+			placeholder="Education"
 			class="py-2 px-4 border border-gray-300 rounded-lg w-full"
 		/>
 		{#if error}
