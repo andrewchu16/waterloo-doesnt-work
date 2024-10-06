@@ -116,8 +116,8 @@ class Catologue:
         pool = []
         for nxt in self.data["jobs"]:
             if nxt["applicationURL"] not in self.visited_jobs:
-                pool.append(nxt["applicationURL"])
-                self.visited_jobs.append(nxt)
+                pool.append(nxt)
+                self.visited_jobs.append(nxt["applicationURL"])
 
         if len(pool) == 0:
             self.visited_jobs = list()
