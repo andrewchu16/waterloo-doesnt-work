@@ -4,7 +4,7 @@ export interface Job {
 	ID: string;
 	picture: string;
 	description: string;
-	location: string[];
+	location: string;
 	pay: string;
 	applicationURL: string;
 }

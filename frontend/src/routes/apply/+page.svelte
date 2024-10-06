@@ -21,7 +21,7 @@
 			loop: true
 		});
 
-        content = [await getNextJob(), await getNextJob()];
+		content = [await getNextJob(), await getNextJob()];
 
 		swiper.on('slideNextTransitionEnd', async () => {
 			// dislike
@@ -29,11 +29,10 @@
 				...ua,
 				dislikedJobs: [...ua.dislikedJobs, content[index]?.id]
 			}));
-            console.log(content, index);
+			console.log(content, index);
 
-            content[index] = await getNextJob();
+			content[index] = await getNextJob();
 			index = (index + 1) % 2;
-
 		});
 
 		swiper.on('slidePrevTransitionEnd', async () => {
@@ -42,9 +41,9 @@
 				...ua,
 				likedJobs: [...ua.likedJobs, content[index]?.id]
 			}));
-            console.log(content, index);
+			console.log(content, index);
 
-            content[index] = await getNextJob();
+			content[index] = await getNextJob();
 			index = (index + 1) % 2;
 		});
 
@@ -81,15 +80,23 @@
 </svelte:head>
 <div class="h-screen w-screen swiper">
 	<div class="swiper-wrapper">
-		<div class="bg-primary swiper-slide">
+		<div class="bg-white swiper-slide">
 			{#if content[0] !== null}
 				<JobPage jobPosting={content[0]} />
-			{:else}NO JOB 1{/if}
+			{:else}
+				<div class="h-full w-full flex items-center justify-center">
+					<h1 class="text-2xl font-display">No Jobs Available :/</h1>
+				</div>
+			{/if}
 		</div>
-		<div class="bg-secondary swiper-slide">
+		<div class="bg-white swiper-slide">
 			{#if content[1] !== null}
 				<JobPage jobPosting={content[1]} />
-			{:else}NO JOB 2{/if}
+			{:else}
+				<div class="h-full w-full flex items-center justify-center">
+					<h1 class="text-2xl font-display">No Jobs Available :/</h1>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>
