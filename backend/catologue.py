@@ -2,7 +2,7 @@ from openai import OpenAI
 from secret import API_KEY, ORGANIZATION_ID
 from const import SUMMARY_PROMPT, IMAGE_PROMPT
 from bs4 import BeautifulSoup
-from random import randint
+from random import randint, shuffle
 
 import requests
 import json
@@ -22,6 +22,7 @@ class Catalogue:
         self.data = {
             "jobs": []
         }
+        self.visited_jobs = set()
         self.load()
         self.read_catalogue()
     
@@ -111,9 +112,19 @@ class Catalogue:
     
 
     def get_random_job(self):
+        
+        pool = []
+        for nxt in self.data["job"]:
+            if nxt["url"] not in self.visited_jobs:
+                pool.append(nxt)
+                self.visited_jobs.add(nxt)
 
-        index = randint(0, len(self.data["jobs"])-1)
-        return self.data["jobs"][index]
+        if len(pool) == 0:
+            self.visited_jobs = set()
+            return self.get_random_job()
+        
+        shuffle(pool)
+        return pool[0]
     
 
 c = Catalogue()
