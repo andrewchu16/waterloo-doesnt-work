@@ -33,6 +33,7 @@
 			bind:value={resumeSummary}
 			placeholder="Write a brief summary of your resume..."
 			class="py-2 px-4 border border-gray-300 rounded-lg w-full"
+			rows="10"
 		></textarea>
 		{#if error}
 			<p class="text-red-500">{error}</p>

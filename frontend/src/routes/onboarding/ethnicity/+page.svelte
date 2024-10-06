@@ -45,10 +45,10 @@
 		<label>
 			<input
 				type="checkbox"
-				checked={ethnicity.includes('Asian')}
-				on:change={() => toggleEthnicity('Asian')}
+				checked={ethnicity.includes('East Asian')}
+				on:change={() => toggleEthnicity('East Asian')}
 			/>
-			Asian
+			East Asian
 		</label>
 
 		<label>
