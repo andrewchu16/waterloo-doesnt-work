@@ -9,5 +9,6 @@
 		<h1 class="text-2xl font-display">{jobPosting.companyName}</h1>
 		<p>{jobPosting.jobTitle}</p>
 		<p>{jobPosting.description}</p>
+        <img src={jobPosting.picture} alt={jobPosting.jobTitle} />
 	</div>
 </div>

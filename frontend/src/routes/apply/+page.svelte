@@ -16,38 +16,36 @@
 	let user: User;
 	let userActivity: UserActivity;
 
-	onMount(() => {
+	onMount(async () => {
 		swiper = new Swiper('.swiper', {
 			loop: true
 		});
 
-		swiper.on('slideNextTransitionEnd', () => {
+        content = [await getNextJob(), await getNextJob()];
+
+		swiper.on('slideNextTransitionEnd', async () => {
 			// dislike
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
 				dislikedJobs: [...ua.dislikedJobs, content[index]?.id]
 			}));
+            console.log(content, index);
 
-			setTimeout(async () => {
-				content[index] = await getNextJob();
-			}, 100);
-
+            content[index] = await getNextJob();
 			index = (index + 1) % 2;
-            console.log(userActivity);
+
 		});
 
-		swiper.on('slidePrevTransitionEnd', () => {
+		swiper.on('slidePrevTransitionEnd', async () => {
 			// like
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
 				likedJobs: [...ua.likedJobs, content[index]?.id]
 			}));
+            console.log(content, index);
 
-			setTimeout(async () => {
-				content[index] = await getNextJob();
-			}, 100);
+            content[index] = await getNextJob();
 			index = (index + 1) % 2;
-            console.log(userActivity);
 		});
 
 		userStore.subscribe((u: User) => {
