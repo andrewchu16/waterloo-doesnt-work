@@ -1,9 +1,31 @@
 from threading import Thread
+from catologue import Catologue
 
 import json
 
+
+def format_response(info: dict, status: int):
+
+    response = Response(
+        response = json.dumps(info),
+        status = status,
+        mimetype = "application/json"
+    )
+
+    response.status_code = status
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
 class Server:
+
+
     def __init__(self) -> None:
+
+        self.jobs = Catologue()
+
+        # Don't need this just yet ...
+        '''
         try:
             print("Loading jobs.json...")
             with open("jobs.json", "r") as d:
@@ -15,8 +37,9 @@ class Server:
             self.setup()
         # Start update loop
         Thread(target=self.update_loop).start()
+        '''
 
-    def get_job(self, id: str):
+    def get_job(self, user_json=None, job_pref_json=None):
         """
         View information about the job listing
 
@@ -49,6 +72,4 @@ class Server:
         }
         """
         # Get job
-        if id not in self.data:
-            return format_response({"status": "error", "message": "Job not found"}, 404)
-        # idk return something
+        return format_response(self.jobs.get_random_job(), 200)

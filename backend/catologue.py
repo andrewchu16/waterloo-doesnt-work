@@ -1,11 +1,11 @@
-import requests
-import json
-
 from openai import OpenAI
 from secret import API_KEY, ORGANIZATION_ID
 from const import SUMMARY_PROMPT, IMAGE_PROMPT
 from bs4 import BeautifulSoup
-from random import randint
+from random import randint, shuffle
+
+import requests
+import json
 
 
 client = OpenAI(
@@ -19,7 +19,10 @@ class Catalogue:
 
     def __init__(self):
 
-        self.data = dict()
+        self.data = {
+            "jobs": []
+        }
+        self.visited_jobs = set()
         self.load()
         self.read_catalogue()
     
@@ -62,22 +65,21 @@ class Catalogue:
         )
 
         new_id = randint(1, 1000000)
-        self.data[url] = {
+        self.data["jobs"].append({
             "ID": str(new_id),
-            "ApplicationURL": url
-        }
+            "applicationURL": url
+        })
 
         content = response.choices[0].message.content.split('\n')
         
         for line in content:
             header, body = line.split(' ', 1)
-            print(header + " HEY " + body)
-            self.data[url][header[:len(header)-1]] = body
+            self.data["jobs"][-1][header[:len(header)-1]] = body.rstrip()
 
         image_prompt = IMAGE_PROMPT
-        image_prompt = image_prompt.replace('{name}', self.data[url]['CompanyName'])
-        image_prompt = image_prompt.replace('{title}', self.data[url]["JobTitle"])
-        image_prompt = image_prompt.replace('{description}', self.data[url]['Description'])
+        image_prompt = image_prompt.replace('{name}', self.data["jobs"][-1]['companyName'])
+        image_prompt = image_prompt.replace('{title}', self.data["jobs"][-1]["jobTitle"])
+        image_prompt = image_prompt.replace('{description}', self.data["jobs"][-1]['description'])
 
         response = client.images.generate(
             model = "dall-e-3",
@@ -86,7 +88,7 @@ class Catalogue:
             n = 1,
         )
 
-        self.data[url]['Picture'] = response.data[0].url
+        self.data["jobs"][-1]['picture'] = response.data[0].url
         self.dump()
         
     
@@ -99,15 +101,30 @@ class Catalogue:
             for nxt in lines:
                 url = nxt.rstrip('\n')
 
-                if url not in self.data:
+                job_found = False
+                for job in self.data["jobs"]:
+
+                    if job["applicationURL"] == url:
+                        job_found = True
+                
+                if not job_found:
                     self.add_job(url)
     
 
-    def test(self):
+    def get_random_job(self):
+        
+        pool = []
+        for nxt in self.data["job"]:
+            if nxt["url"] not in self.visited_jobs:
+                pool.append(nxt)
+                self.visited_jobs.add(nxt)
 
-        for nxt in self.data:
-
-            print(nxt, self.data[nxt])
-
+        if len(pool) == 0:
+            self.visited_jobs = set()
+            return self.get_random_job()
+        
+        shuffle(pool)
+        return pool[0]
+    
 
 c = Catalogue()
