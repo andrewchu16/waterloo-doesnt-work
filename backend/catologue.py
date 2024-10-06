@@ -14,7 +14,7 @@ client = OpenAI(
 )
 
 
-class Catalogue:
+class Catologue:
 
 
     def __init__(self):
