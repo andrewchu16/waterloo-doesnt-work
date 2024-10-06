@@ -27,7 +27,7 @@
 			// dislike
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
-				dislikedJobs: [...ua.dislikedJobs, content[index]?.id]
+				dislikedJobs: [...ua.dislikedJobs, content[index]?.ID]
 			}));
 			console.log(content, index);
 
@@ -39,7 +39,7 @@
 			// like
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
-				likedJobs: [...ua.likedJobs, content[index]?.id]
+				likedJobs: [...ua.likedJobs, content[index]?.ID]
 			}));
 			console.log(content, index);
 

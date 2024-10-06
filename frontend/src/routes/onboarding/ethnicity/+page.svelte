@@ -10,7 +10,6 @@
 		// Subscribe to userStore
 		userStore.subscribe((user: User) => {
 			ethnicity = user.ethnicity;
-			console.log(ethnicity)
 		});
 	});
 
