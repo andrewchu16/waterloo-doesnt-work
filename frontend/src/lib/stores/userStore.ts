@@ -1,17 +1,6 @@
 // userStore.ts
 import { persistToLocalStorage } from '../localStorageUtil';
-
-export type SeasonAvailable = 'winter 2025' | 'summer 2025' | 'fall 2025' | 'spring 2025';
-
-export interface User {
-	name: string;
-	email: string;
-	ethnicity: string[];
-	resumeSummary: string;
-	education: string;
-	graduationYear: number | null;
-	seasonAvailable: SeasonAvailable;
-}
+import { type User } from '../models/user.model';
 
 // Initial value for the user
 const initialUser: User = {

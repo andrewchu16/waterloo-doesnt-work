@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { userStore, type User, type SeasonAvailable } from '$lib/stores/userStore';
+	import { userStore, } from '$lib/stores/userStore';
+	import { type SeasonAvailable } from '$lib/models/seasonAvailability.model';
+	import { type User } from '$lib/models/user.model';
 	import { onMount } from 'svelte';
 
 	let seasonAvailable: SeasonAvailable = 'winter 2025';

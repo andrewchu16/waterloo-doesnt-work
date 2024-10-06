@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { userStore, type User } from '$lib/stores/userStore';
+	import { userStore } from '$lib/stores/userStore';
+	import { type User } from '$lib/models/user.model';
 	import { onMount } from 'svelte';
 
 	let resumeSummary: string = '';

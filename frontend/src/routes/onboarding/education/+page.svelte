@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { userStore, type User } from '$lib/stores/userStore';
+	import { userStore } from '$lib/stores/userStore';
+	import { type User } from '$lib/models/user.model';
 	import { onMount } from 'svelte';
 
 	let education: string = '';
@@ -9,7 +10,7 @@
 	// Subscribe to userStore
 	userStore.subscribe((user: User) => {
 		education = user.education;
-        graduationYearStr = user.graduationYear ? user.graduationYear.toString() : '';
+		graduationYearStr = user.graduationYear ? user.graduationYear.toString() : '';
 	});
 
 	const handleNext = (event: Event) => {

@@ -1,20 +1,15 @@
 // userActivityStore.ts
+import type { UserActivity } from '$lib/models/userActivity.model';
 import { persistToLocalStorage } from '../localStorageUtil';
-
-// Define the User Activity interface
-export interface UserActivity {
-	LikedJobs: string[];
-	DislikedJobs: string[];
-}
 
 // Initial value for user activity
 const initialUserActivity: UserActivity = {
-	LikedJobs: [],
-	DislikedJobs: []
+	likedJobs: [],
+	dislikedJobs: []
 };
 
 // Create a writable store that persists to localStorage
-export const userActivity = persistToLocalStorage<UserActivity>(
+export const userActivityStore = persistToLocalStorage<UserActivity>(
 	'userActivityStore',
 	initialUserActivity
 );
