@@ -117,11 +117,11 @@ class Catologue:
         for nxt in self.data["jobs"]:
             if nxt["applicationURL"] not in self.visited_jobs:
                 pool.append(nxt)
-                self.visited_jobs.append(nxt["applicationURL"])
 
         if len(pool) == 0:
             self.visited_jobs = list()
             return self.get_random_job()
         
         shuffle(pool)
+        self.visited_jobs.append(pool[0]["applicationURL"])
         return pool[0]
