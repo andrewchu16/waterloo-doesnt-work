@@ -22,7 +22,7 @@ class Catologue:
         self.data = {
             "jobs": []
         }
-        self.visited_jobs = set()
+        self.visited_jobs = list()
         self.load()
         self.read_catalogue()
     
@@ -114,13 +114,13 @@ class Catologue:
     def get_random_job(self):
         
         pool = []
-        for nxt in self.data["job"]:
-            if nxt["url"] not in self.visited_jobs:
+        for nxt in self.data["jobs"]:
+            if nxt["applicationURL"] not in self.visited_jobs:
                 pool.append(nxt)
-                self.visited_jobs.add(nxt)
+                self.visited_jobs.append(nxt)
 
         if len(pool) == 0:
-            self.visited_jobs = set()
+            self.visited_jobs = list()
             return self.get_random_job()
         
         shuffle(pool)

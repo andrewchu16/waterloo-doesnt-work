@@ -25,7 +25,7 @@
 			// dislike
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
-				dislikedJobs: [...ua.dislikedJobs, content[index]!.id]
+				dislikedJobs: [...ua.dislikedJobs, content[index]?.id]
 			}));
 
 			setTimeout(async () => {
@@ -33,19 +33,21 @@
 			}, 100);
 
 			index = (index + 1) % 2;
+            console.log(userActivity);
 		});
 
 		swiper.on('slidePrevTransitionEnd', () => {
 			// like
 			userActivityStore.update((ua: UserActivity) => ({
 				...ua,
-				likedJobs: [...ua.likedJobs, content[index]!.id]
+				likedJobs: [...ua.likedJobs, content[index]?.id]
 			}));
 
 			setTimeout(async () => {
 				content[index] = await getNextJob();
 			}, 100);
 			index = (index + 1) % 2;
+            console.log(userActivity);
 		});
 
 		userStore.subscribe((u: User) => {
@@ -58,7 +60,7 @@
 	});
 
 	const getNextJob = async () => {
-		const response = await fetch('http://localhost:3000/get-job', {
+		const response = await fetch('http://localhost:5000/get_job', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
