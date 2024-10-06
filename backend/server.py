@@ -39,7 +39,7 @@ class Server:
         Thread(target=self.update_loop).start()
         '''
 
-    def get_job(self, user_json, job_pref_json):
+    def get_job(self, user_json=None, job_pref_json=None):
         """
         View information about the job listing
 

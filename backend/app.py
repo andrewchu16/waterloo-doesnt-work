@@ -5,12 +5,9 @@ import json
 from server import Server
 
 app = Flask(__name__)
+CORS(app)
 
 server = Server()
-
-@app.route('/')
-def home():
-    return jsonify({"message": "Hello, World!"})
 
 if __name__ == '__main__':
     app.run()
@@ -64,10 +61,10 @@ def get_job():
             status: "success"
         }
         """
-    id = request.form.get("id")
-    user = request.form.get("user")
-    activity = request.form.get("activity")
-    return server.get_job(id)
+    #id = request.form.get("id")
+    #user = request.form.get("user")
+    #activity = request.form.get("activity")
+    return server.get_job()
 
 @app.route("/summarize_resume", methods=["GET"])
 def summarize_resume():
@@ -83,7 +80,7 @@ def summarize_resume():
         "Summary": idk what to put here
     }
     """
-    resume = server.add_resume(request.data)
-    summary = summarize(f"{resume}")
+    #resume = server.add_resume(request.data)
+    #summary = summarize(f"{resume}")
 
-    return summary
+    return {} #summary
