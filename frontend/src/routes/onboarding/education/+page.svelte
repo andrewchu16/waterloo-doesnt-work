@@ -4,6 +4,7 @@
 
 	let education: string = '';
 	let error: string = '';
+	let graduationYearStr: string = '';
 
 	// Subscribe to userStore
 	userStore.subscribe((user: User) => {
@@ -15,7 +16,8 @@
 		if (!education) {
 			error = 'Education is required.';
 		} else {
-			userStore.update((user: User) => ({ ...user, education })); // Update store
+			const graduationYear: number | null = graduationYearStr ? parseInt(graduationYearStr) : null;
+			userStore.update((user: User) => ({ ...user, education, graduationYear })); // Update store
 			error = '';
 			location.href = '/onboarding/seasonAvailable'; // Navigate to next page
 		}
@@ -32,6 +34,16 @@
 			bind:value={education}
 			type="text"
 			placeholder="Education"
+			class="py-2 px-4 border border-gray-300 rounded-lg w-full"
+		/>
+		{#if error}
+			<p class="text-red-500">{error}</p>
+		{/if}
+		<h1 class="text-2xl font-display">Graduating Year (if applicable)</h1>
+		<input
+			bind:value={graduationYearStr}
+			type="text"
+			placeholder="Graduating Year"
 			class="py-2 px-4 border border-gray-300 rounded-lg w-full"
 		/>
 		{#if error}

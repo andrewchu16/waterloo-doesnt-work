@@ -5,7 +5,7 @@
 	<title>Work'd</title>
 </svelte:head>
 <main class="h-screen w-screen">
-    <div class="h-full w-full bg-primary/95 flex flex-col items-center justify-center">
+    <div class="h-full w-full bg-primary/90 flex flex-col items-center justify-center">
         <div class="h-2/3 w-full flex flex-col items-center justify-center">
             <h1 class="font-display text-5xl text-white display-spacing suffix-animation">work</h1>
             <h2 class="pt-4 text-white">Take back your day.</h2>
