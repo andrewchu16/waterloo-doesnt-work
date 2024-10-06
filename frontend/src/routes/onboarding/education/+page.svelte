@@ -9,6 +9,7 @@
 	// Subscribe to userStore
 	userStore.subscribe((user: User) => {
 		education = user.education;
+        graduationYearStr = user.graduationYear ? user.graduationYear.toString() : '';
 	});
 
 	const handleNext = (event: Event) => {
