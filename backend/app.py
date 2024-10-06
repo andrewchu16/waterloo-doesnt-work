@@ -13,7 +13,7 @@ if __name__ == '__main__':
     app.run()
 
 
-@app.route("/get_job", methods=["GET"])
+@app.route("/get_job", methods=["POST"])
 def get_job():
     """
         View information about the user's job preferences
@@ -66,7 +66,7 @@ def get_job():
     #activity = request.form.get("activity")
     return server.get_job()
 
-@app.route("/summarize_resume", methods=["GET"])
+@app.route("/summarize_resume", methods=["POST"])
 def summarize_resume():
     """
     Summarizes user resume
