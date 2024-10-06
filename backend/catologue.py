@@ -126,5 +126,3 @@ class Catologue:
         shuffle(pool)
         return pool[0]
     
-
-c = Catalogue()
